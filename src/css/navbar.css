@@ -1,0 +1,39 @@
+/* #17a2b8 is the color of navbar */
+
+nav {
+    color: white;
+    width: 100%;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+ul {
+    justify-content: space-between;
+    align-items: center;
+}
+
+li a {
+    color: white;
+    font-weight: 500;
+}
+
+li a:hover {
+    text-decoration: none;
+}
+
+li a:last-child {
+    margin-right: 1vw;
+}
+
+nav div {
+    width: 70vw;
+    padding-left: 40vw;
+}
+
+nav h2 {
+    justify-content: center;
+    align-items: center;
+}

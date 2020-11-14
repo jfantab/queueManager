@@ -6,15 +6,37 @@
 
     <!-- Bootstrap -->
     <link href="../css/bootstrap/bootstrap.min.css" rel="stylesheet">
-
-    <link href="../css/fileUploads.css" rel="stylesheet">
     <link href="../css/navbar.css" rel="stylesheet">
+    <link href="../css/fileUploads.css" rel="stylesheet">
+    
 
 </head>
 <body>
 
     <div id="app">
         <nav-bar></nav-bar>
+    </div>
+    <div id="content">
+        <table class="table table-striped">
+            <tr>
+                <th>Name of File</th>
+                <th>File Type</th>
+                <th>Size</th>
+                <th>Date Created</th>
+                <th>Uploaded By</th>
+            </tr>
+            <tr>
+                <td>Placeholder</td>
+                <td>Placeholder</td>
+                <td>Placeholder</td>
+                <td>Placeholder</td>
+                <td>Placeholder</td>
+            </tr>
+        </table>
+        <form id="uploadbanner" enctype="multipart/form-data" method="post" action="#">
+            <input id="fileupload" type="file" />
+            <input type = "upload" value = "Upload File" id="submit" />
+        </form>
     </div>
 
     <!-- Vue.js -->

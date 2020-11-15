@@ -1,0 +1,45 @@
+#app {
+    height: 100vh;
+}
+
+nav-bar {
+    position: absolute;
+}
+
+.container {
+    border: 1px solid black;
+    margin-top: 10vh;
+    margin-bottom: 5vh;
+    height: 50vh;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+div > input:first-child {
+    height: 10vh;
+    width: 65vw;
+}
+
+input[value="Submit"] {
+    height: 3rem;
+    width: 6rem;
+}
+
+.question {
+    border-bottom: 1px solid gray;
+    height: 5vh;
+    width: 100%;
+    padding: 1rem;
+}

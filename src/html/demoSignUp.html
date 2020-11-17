@@ -6,7 +6,6 @@
 
     <!-- Bootstrap -->
     <link href="../css/bootstrap/bootstrap.min.css" rel="stylesheet">
-
     <link href="../css/demoSignUp.css" rel="stylesheet">
     <link href="../css/navbar.css" rel="stylesheet">
 
@@ -14,15 +13,23 @@
 <body>
     <div id="app">
         <nav-bar></nav-bar>
-        <h1 style="margin-left: 16.9%; margin-top: 1%">
+        <h1 style="margin-left: 16.9%; margin-top: 2%">
           Demo Queue
         </h1>
-        <div class="col-md-8 " style = "margin-top: 5%">
-            <input style="width:40%; height:auto; margin-left:24.6%" placeholder="Enter your name">
-            <input type="submit" value="Submit" style="width:12%; height:auto">
+        <div class="col-md-8 " style = "margin-top: 3%">
+          <form onsubmit="pinSubmission(); return false">
+            <input id="pins" style="width:23%; height:auto; margin-left:24.6%" placeholder="Enter PIN">
+            <input id="pinSubmit" type="submit" value="Submit" style="width:12%; height:auto">
+          </form>
+          <form onsubmit="nameSubmission(); return false">
+            <input id="names" style="width:40%; height:auto; margin-left:24.6%; margin-top: 1%" placeholder="Enter your name">
+            <input id="nameSubmit" type="submit" value="Submit" style="width:12%; height:auto">
+          </form>
         </div>
 
-        <div class="container col-md-8 .flex-row demoParent" style = "margin-left:17%">
+        <div class="container col-md-8 .flex-row" style = "margin-left:17%; overflow-y:auto; margin-top: 4%">
+          <ol class="demoParent">
+          </ol>
         </div>
 
     </div>

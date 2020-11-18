@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Demo Sign Up</title>
+    <title>Queue Sign-Up</title>
 
     <!-- Bootstrap -->
     <link href="../css/bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -12,33 +12,58 @@
 </head>
 <body>
     <div id="app">
-        <nav-bar></nav-bar>
-        <h1 style="margin-left: 16.9%; margin-top: 2%">
-          Demo Queue
-        </h1>
-        <div class="col-md-8 " style = "margin-top: 3%">
-          <form onsubmit="pinSubmission(); return false">
-            <input id="pins" style="width:23%; height:auto; margin-left:24.6%" placeholder="Enter PIN">
-            <input id="pinSubmit" type="submit" value="Submit" style="width:12%; height:auto">
-          </form>
-          <form onsubmit="nameSubmission(); return false">
-            <input id="names" style="width:40%; height:auto; margin-left:24.6%; margin-top: 1%" placeholder="Enter your name">
-            <input id="nameSubmit" type="submit" value="Submit" style="width:12%; height:auto">
-          </form>
-        </div>
+      <nav-bar></nav-bar>
 
-        <div class="container col-md-8 .flex-row" style = "margin-left:17%; overflow-y:auto; margin-top: 4%">
-          <ol class="demoParent">
-          </ol>
-        </div>
+      <!--Main Header-->
+      <h1 class="q-header">
+        Queue Sign-Up
+      </h1>
 
+      <!--Student/TA PIN Entry-->
+      <div class="col-md-8 q-entry">
+        <form onsubmit="pinSubmission(); return false">
+          <input id="pins" class="pin-enter" placeholder="Enter PIN">
+          <input id="pinSubmit" type="submit" value="Submit" class="pin-submit">
+        </form>
+      </div>
+
+      <!--Demo Queue Name Entry-->
+      <h3 class="q-title">Demo Queue</h3>
+      <div class="col-md-8 q-entry">
+        <form onsubmit="demoSubmission(); return false">
+          <input id="names" class="q-name" placeholder="Enter your name">
+          <input id="demoSubmit" type="submit" value="Demo" class="q-submit">
+        </form>
+      </div>
+
+      <!--Demo Queue Container-->
+      <div class="container col-md-8 .flex-row">
+        <ol class="demoParent">
+        </ol>
+      </div>
+
+      <!--Question Queue Name Entry-->
+      <h3 class="q-title">Questions Queue</h3>
+      <div class="col-md-8 q-entry">
+        <form onsubmit="questionSubmission(); return false">
+          <input id="qnames" class="q-name" placeholder="Enter your name">
+          <input id="questionSubmit" type="submit" value="Question" class="q-submit">
+        </form>
+      </div>
+
+      <!--Question Queue Container-->
+      <div class="container col-md-8 .flex-row">
+        <ol class="questionParent">
+        </ol>
+      </div>
     </div>
+  </div>
 
-    <!-- Vue.js -->
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mdbvue/lib/index.js"></script>
-    <script src="../js/navbar.js"></script>
-    <script src="../js/demoSignUp.js"></script>
+  <!-- Vue.js -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mdbvue/lib/index.js"></script>
+  <script src="../js/navbar.js"></script>
+  <script src="../js/demoSignUp.js"></script>
 
 </body>
 </html>

@@ -2,7 +2,7 @@ const express = require('express')
 const PORT = 8080
 
 //
-//  Do "npm install formidable" in terminal to install multer
+//  Do "npm install multer" in terminal to install multer
 //
 const multer = require('multer')
 let storeLoc = multer.diskStorage({
@@ -24,6 +24,13 @@ const postFile = (req, res, next) => {
 }
 
 //
+//  Handle a loading file database
+//
+
+
+
+
+//
 //  Set up the server
 //
 const main = () => {
@@ -33,6 +40,7 @@ const main = () => {
 
     app.use(express.json())
     app.use(express.static("src"))
+    app.get("/html/fileUploads.html", getFiles)
     app.post("/html/fileUploads.html", upload.single('upload'), postFile)
 
 

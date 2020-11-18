@@ -17,26 +17,27 @@
         <nav-bar></nav-bar>
     </div>
     <div id="content">
+        <form class="uploadBanner" enctype="multipart/form-data" method="post" action="/html/fileUploads.html">
+            <input name="upload" type="file" class="file"/>
+            <input type = "submit" value = "sumbit"/>
+        </form>
         <table class="table table-striped">
             <tr>
                 <th>Name of File</th>
                 <th>File Type</th>
                 <th>Size</th>
                 <th>Date Created</th>
-                <th>Uploaded By</th>
+                <th>Download Link</th>
             </tr>
             <tr>
                 <td>Placeholder</td>
                 <td>Placeholder</td>
                 <td>Placeholder</td>
                 <td>Placeholder</td>
-                <td>Placeholder</td>
+                <td><button class="button"> Download</button></td>
             </tr>
         </table>
-        <form id="uploadbanner" enctype="multipart/form-data" method="post" action="#">
-            <input id="fileupload" type="file" />
-            <input type = "submit" value = "Upload File" id="filesubmit" />
-        </form>
+        
     </div>
 
     <!-- Vue.js -->

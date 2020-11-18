@@ -11,6 +11,8 @@ nav-bar {
     margin-top: 10vh;
     margin-bottom: 5vh;
     height: 50vh;
+    overflow-y: auto;
+    padding: 0;
 }
 
 .flex-row {
@@ -30,16 +32,19 @@ nav-bar {
 div > input:first-child {
     height: 10vh;
     width: 65vw;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 input[value="Submit"] {
-    height: 3rem;
-    width: 6rem;
+    margin-top: 1vh;
+    height: 2rem;
+    width: 4.5rem;
 }
 
 .question {
     border-bottom: 1px solid gray;
-    height: 5vh;
+    height: 2rem;
     width: 100%;
-    padding: 1rem;
+    padding: 3rem;
 }

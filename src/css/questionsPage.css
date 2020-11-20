@@ -48,3 +48,32 @@ input[value="Submit"] {
     width: 100%;
     padding: 3rem;
 }
+
+
+.arrow-container {
+    display: inline-flex;
+    flex-direction: column;
+    margin-right: 1rem;
+}
+
+.arrow-container span {
+    text-align: center;
+    font-size: 1rem;
+}
+
+.arrow-container button {
+    background: transparent;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+}
+
+.arrow-container button:hover {
+    background: #eee;
+}
+
+.arrow-container svg {
+    height: 24px;
+    width: 24px;
+    margin: 1px;
+}

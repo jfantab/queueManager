@@ -2,7 +2,11 @@ const express = require('express')
 const PORT = 8080
 
 const { getAllQuestions } = require('./routes/questionsPage/getAllQuestions')
+const { getQuestionById } = require('./routes/questionsPage/getQuestionById')
 const { addQuestion } = require('./routes/questionsPage/addQuestion')
+const { voteQuestion } = require('./routes/questionsPage/voteQuestion')
+
+const { writeToFileMiddleware } = require('./routes/writeToFileMiddleware')
 
 const main = () => {
 
@@ -13,7 +17,10 @@ const main = () => {
     app.use(express.static("src"))
 
     app.get('/questions', getAllQuestions)
-    app.post('/questions', addQuestion)
+    app.get('/questions/:id', getQuestionById)
+
+    app.post('/questions/:id', writeToFileMiddleware, addQuestion)
+    app.post('/questions/vote/:id', writeToFileMiddleware, voteQuestion)
 
     app.listen(PORT, (err) => {
         if(err) {

@@ -1,6 +1,10 @@
 const addQuestion = (req, res) => {
-    res.app.locals.questions.push(req.body["questions"])
-    console.log(res.app.locals.questions)
+    const newQuestion = {
+        id: req.params.id,
+        question: req.body["questions"],
+        votes: 0
+    }
+    res.app.locals.questions.push(newQuestion)
     res.status(200).send("New question added")
 }
 

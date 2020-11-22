@@ -18,7 +18,7 @@ const main = () => {
 
     app.get('/questions', getAllQuestions)
     app.get('/questions/:id', getQuestionById)
-
+    
     app.post('/questions/:id', writeToFileMiddleware, addQuestion)
     app.post('/questions/vote/:id', writeToFileMiddleware, voteQuestion)
 

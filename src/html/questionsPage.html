@@ -16,15 +16,16 @@
     <div id="app">
         <nav-bar></nav-bar>
 
-        <div class="container col-md-8 offset-2 .flex-row questionParent">
+        <div class="container col-md-8 offset-2 .flex-row" id="questionParent">
 
         </div>
 
         <div class="col-md-8 offset-2 .flex-row">
-            <input placeholder="Got a question to ask? Type it here.">
+            <input placeholder="Got a question to ask? Type it here." value="">
+            <input placeholder="Enter your name here" value="" id="nameInput">
             <input type="submit" value="Submit">
             <small>
-                Limit to 200 words. Current words:
+                Limit question to 200 words. Current words:
                 <span data-value="0">0</span>
             </small>
         </div>

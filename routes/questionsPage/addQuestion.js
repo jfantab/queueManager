@@ -1,5 +1,6 @@
 const addQuestion = (req, res) => {
     const newQuestion = {
+        name: req.body["name"],
         id: req.params.id,
         question: req.body["questions"],
         votes: 0

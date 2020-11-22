@@ -1,3 +1,12 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    overflow: auto;
+}
+
 #app {
     height: 100vh;
 }
@@ -7,10 +16,9 @@ nav-bar {
 }
 
 .container {
-    border: 1px solid black;
-    margin-top: 10vh;
-    margin-bottom: 5vh;
-    height: 50vh;
+    margin: 10vh auto 5vh;
+    height: 60vh;
+    width: 100vw;
     overflow-y: auto;
     padding: 0;
 }
@@ -43,17 +51,25 @@ input[value="Submit"] {
 }
 
 .question {
-    border-bottom: 1px solid gray;
+    border: 1px solid gray;
+    margin-bottom: 2vh;
     height: 2rem;
     width: 100%;
     padding: 3rem;
+    justify-content: space-between;
 }
 
+.question-text {
+    margin: 0 6rem 0 2rem;
+    overflow-y: auto;
+    width: 30vw;
+}
 
 .arrow-container {
     display: inline-flex;
     flex-direction: column;
     margin-right: 1rem;
+    margin-left: 1rem;
 }
 
 .arrow-container span {
@@ -76,4 +92,8 @@ input[value="Submit"] {
     height: 24px;
     width: 24px;
     margin: 1px;
+}
+
+#clear-question {
+    background: transparent;
 }

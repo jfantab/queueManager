@@ -53,9 +53,8 @@ input[value="Submit"] {
 .question {
     border: 1px solid gray;
     margin-bottom: 2vh;
-    height: 2rem;
     width: 100%;
-    padding: 3rem;
+    padding: 2rem;
     justify-content: space-between;
 }
 
@@ -68,8 +67,7 @@ input[value="Submit"] {
 .arrow-container {
     display: inline-flex;
     flex-direction: column;
-    margin-right: 1rem;
-    margin-left: 1rem;
+    margin-right: 3rem;
 }
 
 .arrow-container span {
@@ -96,4 +94,13 @@ input[value="Submit"] {
 
 #clear-question {
     background: transparent;
+}
+
+.labId {
+    justify-content: flex-start;
+    width: 10vw;
+    margin-top: 1vh;
+    margin-right: 3vw;
+    border: 1px solid black;
+    padding-top: 1vh;
 }

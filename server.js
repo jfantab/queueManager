@@ -1,5 +1,6 @@
 const express = require('express')
 const PORT = 8080
+const fs = require('fs/promises')
 
 //
 //  Do "npm install multer" in terminal to install multer
@@ -18,17 +19,22 @@ let storeLoc = multer.diskStorage({
 //  Handle a file being uploaded to the server
 //
 const postFile = (req, res, next) => {
-    console.log(req.file)
-    console.log(req.body)
+    res.app.locals.metadata[req.file.filename] = req.file
+    fs.writeFile('./uploadsMetadata/metadata.json', JSON.stringify(res.app.locals.metadata), 'utf-8')
     res.redirect('http://localhost:8080/html/fileUploads.html')
 }
 
 //
-//  Handle a loading file database
+//  Handle loading file database
 //
+const getAllFiles = (req, res, next) => {
+    res.status(200).send(res.app.locals.metadata)
+}
 
-
-
+const downloadFile = (req, res, next) => {
+    const fileName = req.path.split("/")[2]
+    res.status(200).download(`./uploads/${fileName}`)
+}
 
 //
 //  Set up the server
@@ -40,10 +46,17 @@ const main = () => {
 
     app.use(express.json())
     app.use(express.static("src"))
-    app.get("/html/fileUploads.html", getFiles)
+    app.get("/getAllFiles", getAllFiles)
     app.post("/html/fileUploads.html", upload.single('upload'), postFile)
+    app.get("/downloadFile/:filename", downloadFile)
 
+    fs.readFile("./uploadsMetadata/metadata.json", "utf-8")
+        .then((fileContents) => JSON.parse(fileContents))
+        .then((data) => {
+            app.locals.metadata = data
+        })
 
+    
     app.listen(PORT, (err) => {
         if(err) {
             console.log(err)

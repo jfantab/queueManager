@@ -2,12 +2,12 @@ const express = require('express')
 const PORT = 8080
 const fs = require('fs/promises')
 
-const { getAllQuestions } = require('./routes/questionsPage/getAllQuestions')
-const { getQuestionByLab } = require('./routes/questionsPage/getQuestionByLab')
-const { addQuestion } = require('./routes/questionsPage/addQuestion')
-const { voteQuestion } = require('./routes/questionsPage/voteQuestion')
+const {getAllQuestions} = require('./routes/questionsPage/getAllQuestions')
+const {getQuestionByLab} = require('./routes/questionsPage/getQuestionByLab')
+const {addQuestion} = require('./routes/questionsPage/addQuestion')
+const {voteQuestion} = require('./routes/questionsPage/voteQuestion')
 
-const { writeToFileMiddleware } = require('./routes/writeToFileMiddleware')
+const {writeToFileMiddleware} = require('./routes/writeToFileMiddleware')
 
 
 //
@@ -15,11 +15,11 @@ const { writeToFileMiddleware } = require('./routes/writeToFileMiddleware')
 //
 const multer = require('multer')
 let storeLoc = multer.diskStorage({
-    destination: function (req, file, cb){
-        cb (null, './uploads/')
+    destination: function (req, file, cb) {
+        cb(null, './uploads/')
     },
     filename: function (req, file, cb) {
-        cb (null, file.originalname)
+        cb(null, file.originalname)
     }
 })
 
@@ -65,15 +65,15 @@ const main = () => {
 
     app.post('/questions/:id', writeToFileMiddleware, addQuestion)
     app.post('/questions/vote/:id', writeToFileMiddleware, voteQuestion)
-  
-  fs.readFile("./uploadsMetadata/metadata.json", "utf-8")
+
+    fs.readFile("./uploadsMetadata/metadata.json", "utf-8")
         .then((fileContents) => JSON.parse(fileContents))
         .then((data) => {
             app.locals.metadata = data
         })
 
     app.listen(PORT, (err) => {
-        if(err) {
+        if (err) {
             console.log(err)
             process.exit(1)
         }

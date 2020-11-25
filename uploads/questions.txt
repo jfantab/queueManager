@@ -1,0 +1,38 @@
+1. TASK 1A: What does the overflow property do? What happens when
+    you set it to auto vs. hidden? 
+
+    This property decides how the content is displayed if the content
+    overflows its container. If it is set to auto, there will be a scroll
+    bar to look though the contents of the box. If it is set to hidden,
+    the content will be "cut off" to the size of the box.
+
+
+2. TASK 1B: What does the order property do for a flex-item?
+    The "order" property puts the elements of the box
+    in order depending on their number.
+
+
+3. Remove the comment
+
+
+4. Write a description of what happens in the push function.
+
+    The push function pushes the most recent button press onto
+    the actions array then creates a new div element to prepend
+    onto the containerElement (which is either the redoStackContainer
+    or the undoStackContainer).
+
+
+5. Write a description of what happens in the pop function.
+
+    The pop function gets the first child of containerElement (a.k.a.
+    the most recent number button press), deletes the div element, then
+    pops and returns the last entry in the action array.
+
+
+6. What does the defer attribute do? Where would we have to put these
+    two statements if we didn't have defer?
+
+    'defer' means that the scripts load stack.js and index.js once the document
+    has finished loading. If we didn't haev defer, we would have to put these statements
+    at the end of the html document.

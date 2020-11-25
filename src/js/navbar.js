@@ -11,7 +11,7 @@ Vue.component('nav-bar', {
                     <a href="../html/questionsPage.html">Questions</a>
                 </li>
                 <li class="nav-item">
-                    <a href="../html/demoSignUp.html">Demo Sign Up</a>
+                    <a href="../html/demoSignUp.html">Queue</a>
                 </li>
             </ul>
         </div>

@@ -1,0 +1,57 @@
+#app {
+  height: 100vh;
+}
+
+.container {
+  border: 2px dotted black;
+
+  margin-bottom: 5vh;
+
+  margin-left:17%;
+  overflow-y:auto;
+  margin-top: 4%;
+  height: 30%;
+}
+
+.q-header {
+  margin-left: 16.9%;
+  margin-top: 2%;
+}
+.q-title {
+  margin-left: 16.9%;
+  margin-top: 4%;
+}
+
+.q-name {
+  width:40%;
+  height:auto;
+  margin-left:24.5%;
+  margin-top: 1%;
+}
+
+.q-submit {
+  width:12%;
+  height:auto;
+}
+
+.q-entry {
+  margin-top: 1%;
+}
+
+.pin-submit {
+  width:12%;
+  height:auto;
+}
+
+.pin-enter {
+  width:23%;
+  height:auto;
+  margin-left:24.6%;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}

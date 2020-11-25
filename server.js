@@ -2,6 +2,14 @@ const express = require('express')
 const PORT = 8080
 const fs = require('fs/promises')
 
+const { getAllQuestions } = require('./routes/questionsPage/getAllQuestions')
+const { getQuestionById } = require('./routes/questionsPage/getQuestionById')
+const { addQuestion } = require('./routes/questionsPage/addQuestion')
+const { voteQuestion } = require('./routes/questionsPage/voteQuestion')
+
+const { writeToFileMiddleware } = require('./routes/writeToFileMiddleware')
+
+
 //
 //  Do "npm install multer" in terminal to install multer
 //
@@ -44,19 +52,26 @@ const main = () => {
     const app = express()
     let upload = multer({storage: storeLoc})
 
+    app.locals.questions = []
+
     app.use(express.json())
     app.use(express.static("src"))
     app.get("/getAllFiles", getAllFiles)
     app.post("/html/fileUploads.html", upload.single('upload'), postFile)
     app.get("/downloadFile/:filename", downloadFile)
 
-    fs.readFile("./uploadsMetadata/metadata.json", "utf-8")
+    app.get('/questions', getAllQuestions)
+    app.get('/questions/:id', getQuestionById)
+
+    app.post('/questions/:id', writeToFileMiddleware, addQuestion)
+    app.post('/questions/vote/:id', writeToFileMiddleware, voteQuestion)
+  
+  fs.readFile("./uploadsMetadata/metadata.json", "utf-8")
         .then((fileContents) => JSON.parse(fileContents))
         .then((data) => {
             app.locals.metadata = data
         })
 
-    
     app.listen(PORT, (err) => {
         if(err) {
             console.log(err)

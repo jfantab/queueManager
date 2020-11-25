@@ -8,7 +8,7 @@
     <link href="../css/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="../css/navbar.css" rel="stylesheet">
     <link href="../css/fileUploads.css" rel="stylesheet">
-    
+
 
 </head>
 <body>
@@ -17,32 +17,33 @@
         <nav-bar></nav-bar>
     </div>
     <div id="content">
+        <form class="uploadBanner" enctype="multipart/form-data" method="post" action="/html/fileUploads.html">
+            <input name="upload" type="file" class="file"/>
+            <input type = "submit" value = "submit"/>
+        </form>
         <table class="table table-striped">
             <tr>
                 <th>Name of File</th>
                 <th>File Type</th>
-                <th>Size</th>
-                <th>Date Created</th>
-                <th>Uploaded By</th>
-            </tr>
-            <tr>
-                <td>Placeholder</td>
-                <td>Placeholder</td>
-                <td>Placeholder</td>
-                <td>Placeholder</td>
-                <td>Placeholder</td>
+                <th>Size (In KB)</th>
+                <th>Download Link</th>
             </tr>
         </table>
-        <form id="uploadbanner" enctype="multipart/form-data" method="post" action="#">
-            <input id="fileupload" type="file" />
-            <input type = "submit" value = "Upload File" id="filesubmit" />
-        </form>
     </div>
+    <template id="tableTemplate">
+        <tr>
+            <td>Placeholder1</td>
+            <td>Placeholder2</td>
+            <td>Placeholder3</td>
+            <td><a href="Placeholder">Download</a></td>
+        </tr>
+    </template>
 
     <!-- Vue.js -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mdbvue/lib/index.js"></script>
     <script src="../js/navbar.js"></script>
+    <script src="../js/fileUploads.js"></script>
 
 </body>
 </html>

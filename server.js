@@ -9,6 +9,9 @@ const {voteQuestion} = require('./routes/questionsPage/voteQuestion')
 
 const {writeToFileMiddleware} = require('./routes/writeToFileMiddleware')
 
+const { getAllFiles } = require('./routes/fileUploadsPage/getAllFiles')
+const { postFile } = require('./routes/fileUploadsPage/postFile')
+const { downloadFile } = require('./routes/fileUploadsPage/downloadFile')
 
 //
 //  Do "npm install multer" in terminal to install multer
@@ -22,27 +25,6 @@ let storeLoc = multer.diskStorage({
         cb(null, file.originalname)
     }
 })
-
-//
-//  Handle a file being uploaded to the server
-//
-const postFile = (req, res, next) => {
-    res.app.locals.metadata[req.file.filename] = req.file
-    fs.writeFile('./uploadsMetadata/metadata.json', JSON.stringify(res.app.locals.metadata), 'utf-8')
-    res.redirect('http://localhost:8080/html/fileUploads.html')
-}
-
-//
-//  Handle loading file database
-//
-const getAllFiles = (req, res, next) => {
-    res.status(200).send(res.app.locals.metadata)
-}
-
-const downloadFile = (req, res, next) => {
-    const fileName = req.path.split("/")[2]
-    res.status(200).download(`./uploads/${fileName}`)
-}
 
 //
 //  Set up the server

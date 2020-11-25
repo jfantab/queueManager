@@ -3,7 +3,7 @@ const PORT = 8080
 const fs = require('fs/promises')
 
 const { getAllQuestions } = require('./routes/questionsPage/getAllQuestions')
-const { getQuestionById } = require('./routes/questionsPage/getQuestionById')
+const { getQuestionByLab } = require('./routes/questionsPage/getQuestionByLab')
 const { addQuestion } = require('./routes/questionsPage/addQuestion')
 const { voteQuestion } = require('./routes/questionsPage/voteQuestion')
 
@@ -61,7 +61,7 @@ const main = () => {
     app.get("/downloadFile/:filename", downloadFile)
 
     app.get('/questions', getAllQuestions)
-    app.get('/questions/:id', getQuestionById)
+    app.get('/questions/:lab', getQuestionByLab)
 
     app.post('/questions/:id', writeToFileMiddleware, addQuestion)
     app.post('/questions/vote/:id', writeToFileMiddleware, voteQuestion)

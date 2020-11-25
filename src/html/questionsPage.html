@@ -16,15 +16,38 @@
     <div id="app">
         <nav-bar></nav-bar>
 
-        <div class="container col-md-8 offset-2 .flex-row questionParent">
+        <!-- DROPDOWN -->
+        <div class="container col-md-8 offset-2 .flex-row">
+            <label for="labsFilter">Filter by labs:</label>
+            <select name="labs" id="labsFilter">
+                <option data-value="choose">Choose</option>
+                <option data-value="1">1</option>
+                <option data-value="2">2</option>
+                <option data-value="3">3</option>
+                <option data-value="4">4</option>
+                <option data-value="5">5</option>
+            </select>
+            <button id="clearFilter">Clear Selection</button>
+            <div id="questionParent">
 
+            </div>
         </div>
 
         <div class="col-md-8 offset-2 .flex-row">
-            <input placeholder="Got a question to ask? Type it here.">
+            <input placeholder="Got a question to ask? Type it here." value="">
+            <input placeholder="Enter your name here" value="" id="nameInput">
+            <label for="labsSelector">Choose a lab:</label>
+            <select name="labs" id="labsSelector">
+                <option data-value="choose">Choose</option>
+                <option data-value="1">1</option>
+                <option data-value="2">2</option>
+                <option data-value="3">3</option>
+                <option data-value="4">4</option>
+                <option data-value="5">5</option>
+            </select>
             <input type="submit" value="Submit">
             <small>
-                Limit to 200 words. Current words:
+                Limit question to 200 words. Current words:
                 <span data-value="0">0</span>
             </small>
         </div>
@@ -34,6 +57,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mdbvue/lib/index.js"></script>
     <script src="../js/navbar.js"></script>
+
     <script src="../js/questionsPage.js"></script>
 
 </body>

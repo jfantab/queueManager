@@ -3,16 +3,8 @@
     padding: 0;
 }
 
-html {
-    overflow: auto;
-}
-
 #app {
     height: 100vh;
-}
-
-nav-bar {
-    position: absolute;
 }
 
 .container {

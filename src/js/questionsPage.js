@@ -14,13 +14,35 @@ headers.set("content-type", "application/json")
 const WORD_LIMIT = 200
 let currentLab = "Choose"
 
-const createQuestionElement = (text, currentId, numVotes, name, lab) => {
+const highlightQuestion = (el) => {
+    let isHighlighted = el.style.backgroundColor === "#ffff00"
+    fetch(`/questions/highlight/${el.dataset.value}`, {
+        headers,
+        method: "POST",
+        body: JSON.stringify({
+            highlighted: (!isHighlighted)
+        })
+    })
+        .then(response => response.ok ? response.json() : Promise.reject())
+        .then(() => {
+            el.style.backgroundColor = (isHighlighted) ? '#ffffff' : '#ffff00'
+            if(isHighlighted)
+                el.querySelector('.clear-question').toggleAttribute('disabled')
+        })
+
+}
+
+const createQuestionElement = (text, currentId, numVotes, name, lab, highlighted) => {
     const el = document.createElement('div')
     el.classList.add('question')
     el.classList.add('flex-row')
     el.setAttribute('data-value', currentId.toString())
     el.innerHTML += `
-                     <div class='arrow-container'>
+                     <div class='arrow-container flex-column'>
+                         <div class="labId flex-column">
+                            <p>Lab ${lab}</p>
+                         </div>
+                         <p><strong>${name}:</strong></p>
                         <button id='up-arrow-button'>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
@@ -28,25 +50,20 @@ const createQuestionElement = (text, currentId, numVotes, name, lab) => {
                         </button>
                         <span data-value=${numVotes.toString()} id="numVotes">${numVotes}</span>
                      </div>
-                     <div class="labId flex-column">
-                        <p>Lab ${lab}</p>
-                     </div>
-                     <h5>${name}:</h5>
-                     <div class="question-text flex-row">
+                     <div class="question-text">
                         <p>${text}</p>
                      </div>
-                     <button id="clear-question">
+                     <button class="clear-question">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/>
                         </svg>
                      </button>
     `
 
+    el.style.backgroundColor = (!highlighted) ? '#ffffff' : '#ffff00'
+
     el.querySelector('#up-arrow-button').addEventListener('click', handleUpvote)
-    el.querySelector('#clear-question').addEventListener('click', () => {
-        el.style.backgroundColor = '#FFFF00'
-        el.querySelector('#clear-question').toggleAttribute('disabled')
-    })
+    el.querySelector('.clear-question').addEventListener('click', () => highlightQuestion(el))
     return el
 }
 
@@ -124,7 +141,9 @@ const associateNameWithQuestion = (event) => {
 }
 
 const renderAllOrFiltered = (d) =>
-    questionParent.appendChild(createQuestionElement(d.question, d.id, d.votes, d.name, d.lab))
+    questionParent.appendChild(
+        createQuestionElement(d.question, d.id, d.votes, d.name, d.lab, d.highlighted)
+    )
 
 
 const getQuestions = () => {
@@ -176,10 +195,12 @@ const main = () => {
             getQuestions()
         })
 
+
         setInterval(() => {
             questionParent.innerHTML = "";
             (currentLab === "Choose") ? getQuestions() : filterLabs()
         }, 5000)
+
     }
 
 }

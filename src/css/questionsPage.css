@@ -23,6 +23,7 @@ nav-bar {
     padding: 0;
 }
 
+
 .flex-row {
     display: flex;
     flex-direction: row;
@@ -35,6 +36,47 @@ nav-bar {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.question {
+    border: 1px solid gray;
+    margin-bottom: 2vh;
+    width: 100%;
+    padding: 2rem;
+    justify-content: space-between;
+}
+
+.question-text {
+    width: 48vw;
+    margin-left: -3vw;
+    overflow: auto;
+}
+
+.arrow-container {
+    margin-right: 3rem;
+    width: 10vw;
+}
+
+.arrow-container span {
+    text-align: center;
+    font-size: 1rem;
+}
+
+.arrow-container button, .clear-question {
+    background: transparent;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+}
+
+.arrow-container button:hover {
+    background: #eee;
+}
+
+.arrow-container svg {
+    height: 18px;
+    width: 18px;
+    margin: 1px;
 }
 
 div > input:first-child {
@@ -50,57 +92,8 @@ input[value="Submit"] {
     width: 4.5rem;
 }
 
-.question {
-    border: 1px solid gray;
-    margin-bottom: 2vh;
-    width: 100%;
-    padding: 2rem;
-    justify-content: space-between;
-}
-
-.question-text {
-    margin: 0 6rem 0 2rem;
-    overflow-y: auto;
-    width: 30vw;
-}
-
-.arrow-container {
-    display: inline-flex;
-    flex-direction: column;
-    margin-right: 3rem;
-}
-
-.arrow-container span {
-    text-align: center;
-    font-size: 1rem;
-}
-
-.arrow-container button {
-    background: transparent;
-    border-radius: 2px;
-    border: none;
-    cursor: pointer;
-}
-
-.arrow-container button:hover {
-    background: #eee;
-}
-
-.arrow-container svg {
-    height: 24px;
-    width: 24px;
-    margin: 1px;
-}
-
-#clear-question {
-    background: transparent;
-}
-
 .labId {
     justify-content: flex-start;
-    width: 10vw;
-    margin-top: 1vh;
-    margin-right: 3vw;
-    border: 1px solid black;
-    padding-top: 1vh;
+    width: 3vw;
+    margin-bottom: 1vh;
 }

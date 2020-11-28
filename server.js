@@ -6,6 +6,7 @@ const {getAllQuestions} = require('./routes/questionsPage/getAllQuestions')
 const {getQuestionByLab} = require('./routes/questionsPage/getQuestionByLab')
 const {addQuestion} = require('./routes/questionsPage/addQuestion')
 const {voteQuestion} = require('./routes/questionsPage/voteQuestion')
+const {highlightQuestion} = require('./routes/questionsPage/higlightQuestion')
 
 const {writeToFileMiddleware} = require('./routes/writeToFileMiddleware')
 
@@ -47,6 +48,7 @@ const main = () => {
 
     app.post('/questions/:id', writeToFileMiddleware, addQuestion)
     app.post('/questions/vote/:id', writeToFileMiddleware, voteQuestion)
+    app.post('/questions/highlight/:id', writeToFileMiddleware, highlightQuestion)
 
     fs.readFile("./uploadsMetadata/metadata.json", "utf-8")
         .then((fileContents) => JSON.parse(fileContents))

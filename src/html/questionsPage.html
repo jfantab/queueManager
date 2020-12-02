@@ -16,7 +16,9 @@
     <div id="app">
         <nav-bar></nav-bar>
 
-        <!-- DROPDOWN -->
+        <div class="col-md-6 offset-2" id="linkJump">
+            <button><a href="#links">Jump to links</a></button>
+        </div>
         <div class="container col-md-8 offset-2 .flex-row">
             <label for="labsFilter">Filter by labs:</label>
             <select name="labs" id="labsFilter">
@@ -45,12 +47,23 @@
                 <option data-value="4">4</option>
                 <option data-value="5">5</option>
             </select>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Submit" id="submitQuestion">
             <small>
                 Limit question to 200 words. Current words:
                 <span data-value="0">0</span>
             </small>
         </div>
+
+        <div class="container col-md-8 offset-2 flex-column" id="links">
+
+        </div>
+
+        <div class="col-md-8 offset-2" id="linkInput">
+            <input placeholder="Drop a helpful link!" value="">
+            <input type="submit" value="Submit" id="submitLink">
+        </div>
+
+        <button id="top"><a href="#">Top</a></button>
     </div>
 
     <!-- Vue.js -->

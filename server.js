@@ -2,11 +2,14 @@ const express = require('express')
 const PORT = 8080
 const fs = require('fs/promises')
 
-const {getAllQuestions} = require('./routes/questionsPage/getAllQuestions')
-const {getQuestionByLab} = require('./routes/questionsPage/getQuestionByLab')
-const {addQuestion} = require('./routes/questionsPage/addQuestion')
-const {voteQuestion} = require('./routes/questionsPage/voteQuestion')
-const {highlightQuestion} = require('./routes/questionsPage/higlightQuestion')
+const {getAllQuestions} = require('./routes/questionsPage/questions/getAllQuestions')
+const {getQuestionByLab} = require('./routes/questionsPage/questions/getQuestionByLab')
+const {addQuestion} = require('./routes/questionsPage/questions/addQuestion')
+const {voteQuestion} = require('./routes/questionsPage/questions/voteQuestion')
+const {highlightQuestion} = require('./routes/questionsPage/questions/higlightQuestion')
+
+const {getAllLinks} = require('./routes/questionsPage/links/getAllLinks')
+const {addLink} = require('./routes/questionsPage/links/addLink')
 
 const {writeToFileMiddleware} = require('./routes/writeToFileMiddleware')
 
@@ -36,6 +39,7 @@ const main = () => {
     let upload = multer({storage: storeLoc})
 
     app.locals.questions = []
+    app.locals.links = []
 
     app.use(express.json())
     app.use(express.static("src"))
@@ -49,6 +53,10 @@ const main = () => {
     app.post('/questions/:id', writeToFileMiddleware, addQuestion)
     app.post('/questions/vote/:id', writeToFileMiddleware, voteQuestion)
     app.post('/questions/highlight/:id', writeToFileMiddleware, highlightQuestion)
+
+    app.get('/links', getAllLinks)
+
+    app.post('/links', writeToFileMiddleware, addLink)
 
     fs.readFile("./uploadsMetadata/metadata.json", "utf-8")
         .then((fileContents) => JSON.parse(fileContents))

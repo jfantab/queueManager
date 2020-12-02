@@ -2,6 +2,9 @@ const express = require('express')
 const PORT = 8080
 const fs = require('fs/promises')
 
+const {emitError} = require('./routes/emitError')
+const {handleError} = require('./routes/handleError')
+
 const {getAllQuestions} = require('./routes/questionsPage/questions/getAllQuestions')
 const {getQuestionByLab} = require('./routes/questionsPage/questions/getQuestionByLab')
 const {addQuestion} = require('./routes/questionsPage/questions/addQuestion')
@@ -53,6 +56,7 @@ const main = () => {
 
     app.use(express.json())
     app.use(express.static("src"))
+
     app.get("/getAllFiles", getAllFiles)
     app.post("/html/fileUploads.html", upload.single('upload'), postFile)
     app.get("/downloadFile/:filename", downloadFile)

@@ -1,0 +1,10 @@
+div.container {
+    height: 80vh;
+}
+
+div.flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

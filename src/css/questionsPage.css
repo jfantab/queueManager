@@ -17,10 +17,6 @@ button a, button a:hover {
     height: 100vh;
 }
 
-nav-bar {
-    position: absolute;
-}
-
 .container {
     margin: 10vh auto 5vh;
     height: 60vh;

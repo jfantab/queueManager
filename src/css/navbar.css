@@ -1,8 +1,13 @@
 /* #17a2b8 is the color of navbar */
+* {
+    margin: 0;
+    padding: 0;
+}
 
 nav {
     color: white;
     width: 100%;
+    justify-content: space-between;
 }
 
 .flex-row {
@@ -15,25 +20,29 @@ ul {
     align-items: center;
 }
 
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #b84517;
+}
+
 li a {
     color: white;
     font-weight: 500;
-}
-
-li a:hover {
-    text-decoration: none;
 }
 
 li a:last-child {
     margin-right: 1vw;
 }
 
-nav div {
-    width: 70vw;
-    padding-left: 40vw;
+#nav-items {
+    padding-left: 65vw;
 }
 
-nav h2 {
-    justify-content: center;
-    align-items: center;
+#nav-header {
+    width: 30vw;
 }

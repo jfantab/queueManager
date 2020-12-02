@@ -1,8 +1,10 @@
 Vue.component('nav-bar', {
     template: `
     <nav class="navbar bg-info flex-row">
-        <h2>TA Queue Manager</h2>
-        <div>
+        <div id="nav-header flex-row">
+            <a href="../index.html"><h2>TA Queue Manager</h2><a/>
+        </div>
+        <div id="nav-items">
             <ul class="navbar-nav flex-row">
                 <li class="nav-item">
                     <a href="../html/fileUploads.html">File Upload</a>

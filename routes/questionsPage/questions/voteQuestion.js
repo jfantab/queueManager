@@ -1,11 +1,13 @@
 const voteQuestion = (req, res) => {
-    console.log(req.body)
+    let cur = {}
     res.app.locals.questions.forEach(q => {
-        if(q.id === req.params.id)
+        if(q.id === req.params.id) {
+            cur = q
             q.votes = parseInt(req.body.votes) + 1
+        }
     })
-    console.log(res.app.locals.questions)
-    res.status(200).send("Vote updated")
+    console.log(cur)
+    res.status(200).send(cur)
 }
 
 module.exports = {

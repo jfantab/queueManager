@@ -4,7 +4,7 @@ const addLink = (req, res) => {
     }
     res.app.locals.links.push(newLink)
     console.log(res.app.locals.links)
-    res.status(200).send("Link added")
+    res.status(200).send(newLink)
 }
 
 module.exports = {

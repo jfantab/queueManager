@@ -9,7 +9,7 @@ const addQuestion = (req, res) => {
     }
     res.app.locals.questions.push(newQuestion)
     console.log(res.app.locals.questions)
-    res.status(200).send("New question added")
+    res.status(200).send(newQuestion)
 }
 
 module.exports = {

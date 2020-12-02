@@ -8,6 +8,9 @@ const {addQuestion} = require('./routes/questionsPage/questions/addQuestion')
 const {voteQuestion} = require('./routes/questionsPage/questions/voteQuestion')
 const {highlightQuestion} = require('./routes/questionsPage/questions/higlightQuestion')
 
+const {addToQuestionsPageStats} = require('./routes/questionsPage/addToQuestionsPageStats')
+const {getQuestionsPageStats} = require('./routes/questionsPage/getQuestionsPageStats')
+
 const {getAllLinks} = require('./routes/questionsPage/links/getAllLinks')
 const {addLink} = require('./routes/questionsPage/links/addLink')
 
@@ -41,6 +44,13 @@ const main = () => {
     app.locals.questions = []
     app.locals.links = []
 
+    app.locals.questionsPageStats = {
+        totalQuestions: 4,
+        totalLinks: 3,
+        totalUpvotes: 6,
+        totalHighlights: 1
+    }
+
     app.use(express.json())
     app.use(express.static("src"))
     app.get("/getAllFiles", getAllFiles)
@@ -50,19 +60,25 @@ const main = () => {
     app.get('/questions', getAllQuestions)
     app.get('/questions/:lab', getQuestionByLab)
 
-    app.post('/questions/:id', writeToFileMiddleware, addQuestion)
-    app.post('/questions/vote/:id', writeToFileMiddleware, voteQuestion)
-    app.post('/questions/highlight/:id', writeToFileMiddleware, highlightQuestion)
+    app.get('/questionsPageStats', getQuestionsPageStats)
+
+    app.post('/questions/:id', addToQuestionsPageStats, writeToFileMiddleware, addQuestion)
+    app.post('/questions/vote/:id', addToQuestionsPageStats, writeToFileMiddleware,  voteQuestion)
+    app.post('/questions/highlight/:id', addToQuestionsPageStats, writeToFileMiddleware, highlightQuestion)
 
     app.get('/links', getAllLinks)
 
-    app.post('/links', writeToFileMiddleware, addLink)
+    app.post('/links', writeToFileMiddleware, addToQuestionsPageStats, addLink)
 
     fs.readFile("./uploadsMetadata/metadata.json", "utf-8")
         .then((fileContents) => JSON.parse(fileContents))
         .then((data) => {
             app.locals.metadata = data
         })
+
+    fs.readFile("./questionsPageStats.json", "utf-8")
+        .then((data) =>
+            app.locals.questionsPageStats = JSON.parse(data))
 
     app.listen(PORT, (err) => {
         if (err) {

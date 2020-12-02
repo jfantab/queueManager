@@ -122,8 +122,8 @@ const highlightQuestion = (el) => {
         })
     })
         .then(response => response.ok ? response.json() : Promise.reject())
-        .then(() => {
-            el.style.backgroundColor = (isHighlighted) ? '#ffffff' : '#ffff00'
+        .then(data => {
+            el.style.backgroundColor = (!data.highlighted) ? '#ffffff' : '#ffff00'
             if(isHighlighted)
                 el.querySelector('.clear-question').toggleAttribute('disabled')
         })
@@ -142,9 +142,9 @@ const handleUpvote = (event) => {
             votes: parseInt(voteSpan.dataset.value)
         })
     })
-        .then(response => response.ok ? response.json : Promise.reject())
+        .then(response => response.ok ? response.json() : Promise.reject())
         .then(data => {
-            const newVoteCount = parseInt(data.votes) + 1 //TODO
+            const newVoteCount = parseInt(data.votes)
             voteSpan.dataset.value = newVoteCount.toString()
             voteSpan.textContent = newVoteCount.toString()
         })
@@ -152,7 +152,8 @@ const handleUpvote = (event) => {
 }
 
 const addLinkToServer = () => {
-    const _link = document.querySelector('#linkInput input:first-child').value
+    const linkInput = document.querySelector('#linkInput input:first-child')
+    const _link = linkInput.value
     fetch(`/links`, {
         headers,
         method: "POST",
@@ -161,7 +162,10 @@ const addLinkToServer = () => {
         })
     })
         .then(response => response.ok ? response.json() : Promise.reject()) //TODO — unexpected token L in position 0
-        .then(data => createLinkElement(data))
+        .then(data => {
+            createLinkElement(data)
+            linkInput.value = ""
+        })
         .catch(err => console.log(err))
 }
 

@@ -6,8 +6,8 @@ const highlightQuestion = (req, res) => {
             q.highlighted = req.body.highlighted
         }
     })
-    console.log(res.app.locals.questions)
-    res.status(200).send({highlighted: req.body.highlighted})
+    console.log(cur)
+    res.status(200).send(cur)
 }
 
 module.exports = {

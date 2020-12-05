@@ -22,6 +22,7 @@ const {writeToFileMiddleware} = require('./routes/writeToFileMiddleware')
 const { getAllFiles } = require('./routes/fileUploadsPage/getAllFiles')
 const { postFile } = require('./routes/fileUploadsPage/postFile')
 const { downloadFile } = require('./routes/fileUploadsPage/downloadFile')
+const { getFileUploadStats } = require('./routes/fileUploadsPage/getFileUploadStats')
 
 //
 //  Do "npm install multer" in terminal to install multer
@@ -60,6 +61,7 @@ const main = () => {
     app.get("/getAllFiles", getAllFiles)
     app.post("/html/fileUploads.html", upload.single('upload'), postFile)
     app.get("/downloadFile/:filename", downloadFile)
+    app.get("/fileUploadStats", getFileUploadStats)
 
     app.get('/questions', getAllQuestions)
     app.get('/questions/:lab', getQuestionByLab)
@@ -78,6 +80,12 @@ const main = () => {
         .then((fileContents) => JSON.parse(fileContents))
         .then((data) => {
             app.locals.metadata = data
+        })
+
+    fs.readFile("./uploadsMetadata/fileUploadStats.json", "utf-8")
+        .then((fileContents) => JSON.parse(fileContents))
+        .then((data) => {
+            app.locals.fileUploadStats = data
         })
 
     fs.readFile("./questionsPageStats.json", "utf-8")

@@ -1,15 +1,11 @@
 const questionInputElement = document.querySelector('input:first-child')
-const submitQuestionElement = document.querySelector('#submitQuestion')
 const nameInputElement = document.querySelector('#nameInput')
+
 const labsSelector = document.querySelector('#labsSelector')
 const labsFilter = document.querySelector('#labsFilter')
-const clearLabsFilter = document.querySelector('#clearFilter')
 
 const questionParent = document.querySelector('#questionParent')
-const spanElement = document.querySelector('span')
-
-const linkParent = document.querySelector('#links')
-const submitLinkElement = document.querySelector('#submitLink')
+const wordCountElement = document.querySelector('span')
 
 const headers = new Headers()
 headers.set("content-type", "application/json")
@@ -18,9 +14,6 @@ const WORD_LIMIT = 200
 let currentLab = "Choose"
 
 /* FUNCTIONS TO CONTACT SERVER AND UPDATE FRONTEND */
-
-const renderQuestions = (data) =>
-    data.forEach(d => questionParent.appendChild(createQuestionElement(d)))
 
 const getAllQuestions = () =>
     fetch('/questions')
@@ -67,6 +60,8 @@ const createQuestionElement = (d) => {
     `
 
     el.style.backgroundColor = (highlighted) ? '#ffff00' : '#ffffff'
+    if(highlighted)
+        el.querySelector('.clear-question').setAttribute('disabled')
 
     el.querySelector('#up-arrow-button').addEventListener('click', handleUpvote)
     el.querySelector('.clear-question').addEventListener('click', () => highlightQuestion(el))
@@ -74,6 +69,7 @@ const createQuestionElement = (d) => {
 }
 
 const createLinkElement = (data) => {
+    const linkParent = document.querySelector('#links')
     let l = new URL(data.link)
     const el = document.createElement('div')
     el.classList.add('flex-row')
@@ -84,6 +80,8 @@ const createLinkElement = (data) => {
     linkParent.appendChild(el)
 }
 
+const renderQuestions = (data) =>
+    data.forEach(d => questionParent.appendChild(createQuestionElement(d)))
 const addQuestionToServer = (name, lab) => {
     //send question to server & database
     const currentId = (questionParent.childNodes.length === undefined) ? Number(0) :
@@ -105,8 +103,8 @@ const addQuestionToServer = (name, lab) => {
             questionInputElement.removeAttribute('disabled')
             questionInputElement.value = ""
 
-            spanElement.textContent = '0'
-            spanElement.dataset.value = '0'
+            wordCountElement.textContent = '0'
+            wordCountElement.dataset.value = '0'
         })
         .catch(err => console.log(err))
 
@@ -125,7 +123,7 @@ const highlightQuestion = (el) => {
         .then(data => {
             el.style.backgroundColor = (!data.highlighted) ? '#ffffff' : '#ffff00'
             if(isHighlighted)
-                el.querySelector('.clear-question').toggleAttribute('disabled')
+                el.querySelector('.clear-question').setAttribute('disabled')
         })
         .catch(err => console.log(err))
 
@@ -179,13 +177,13 @@ const processUserInput = (event) => {
             finalizeInput()
         return
     } else if (event.key === 'Backspace') {
-        if (parseInt(spanElement.dataset.value) !== 0)
-            spanElement.dataset.value = parseInt(spanElement.dataset.value) - 1
+        if (parseInt(wordCountElement.dataset.value) !== 0)
+            wordCountElement.dataset.value = parseInt(wordCountElement.dataset.value) - 1
     } else if (event.key.match(/[a-zA-Z0-9]/))
-        spanElement.dataset.value = parseInt(spanElement.dataset.value) + 1
+        wordCountElement.dataset.value = parseInt(wordCountElement.dataset.value) + 1
 
-    spanElement.textContent = parseInt(spanElement.dataset.value)
-    if (parseInt(spanElement.dataset.value) >= WORD_LIMIT)
+    wordCountElement.textContent = parseInt(wordCountElement.dataset.value)
+    if (parseInt(wordCountElement.dataset.value) >= WORD_LIMIT)
         questionInputElement.toggleAttribute('disabled')
 }
 
@@ -237,7 +235,7 @@ const main = () => {
 
         getAllLinks()
 
-        submitQuestionElement.addEventListener('click', finalizeInput)
+        document.querySelector('#submitQuestion').addEventListener('click', finalizeInput)
 
         nameInputElement.addEventListener('keydown', associateNameWithQuestion)
 
@@ -245,16 +243,15 @@ const main = () => {
 
         labsFilter.addEventListener('click', filterLabs)
 
-        clearLabsFilter.addEventListener('click', clearLabs)
+        document.querySelector('#clearFilter').addEventListener('click', clearLabs)
 
-        submitLinkElement.addEventListener('click', addLinkToServer)
+        document.querySelector('#submitLink').addEventListener('click', addLinkToServer)
 
-        /*
         setInterval(() => {
             questionParent.innerHTML = "";
             (currentLab === "Choose") ? getAllQuestions() : filterLabs()
         }, 5000)
-        */
+
     }
 
 }

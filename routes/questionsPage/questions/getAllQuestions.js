@@ -2,12 +2,18 @@ const fs = require('fs/promises')
 
 const rankQuestions = (data) => {
     data.sort((a, b) => {
-        if (a.votes < b.votes)
+        if(a.highlighted)
             return 1
-        else if (a.votes > b.votes)
+        else if(b.highlighted)
             return -1
-        else
-            return 0
+        else {
+            if (a.votes < b.votes)
+                return 1
+            else if (a.votes > b.votes)
+                return -1
+            else
+                return 0
+        }
     })
 
     return data

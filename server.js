@@ -10,6 +10,7 @@ const {getQuestionByLab} = require('./routes/questionsPage/questions/getQuestion
 const {addQuestion} = require('./routes/questionsPage/questions/addQuestion')
 const {voteQuestion} = require('./routes/questionsPage/questions/voteQuestion')
 const {highlightQuestion} = require('./routes/questionsPage/questions/higlightQuestion')
+const {deleteQuestion} = require('./routes/questionsPage/questions/deleteQuestion')
 
 const {addToQuestionsPageStats} = require('./routes/questionsPage/addToQuestionsPageStats')
 const {getQuestionsPageStats} = require('./routes/questionsPage/getQuestionsPageStats')
@@ -47,13 +48,7 @@ const main = () => {
 
     app.locals.questions = []
     app.locals.links = []
-
-    app.locals.questionsPageStats = {
-        totalQuestions: 4,
-        totalLinks: 3,
-        totalUpvotes: 6,
-        totalHighlights: 1
-    }
+    app.locals.questionsPageStats = {}
 
     app.use(express.json())
     app.use(express.static("src"))
@@ -71,6 +66,8 @@ const main = () => {
     app.post('/questions/:id', addToQuestionsPageStats, writeToFileMiddleware, addQuestion)
     app.post('/questions/vote/:id', addToQuestionsPageStats, writeToFileMiddleware,  voteQuestion)
     app.post('/questions/highlight/:id', addToQuestionsPageStats, writeToFileMiddleware, highlightQuestion)
+
+    app.delete('/questions/delete/:id', writeToFileMiddleware, deleteQuestion)
 
     app.get('/links', getAllLinks)
 

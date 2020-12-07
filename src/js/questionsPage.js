@@ -9,7 +9,11 @@ const questionParent = document.querySelector('#questionParent')
 const spanElement = document.querySelector('span')
 
 const linkParent = document.querySelector('#links')
+const linkInput = document.querySelector('#linkInput input:first-child')
 const submitLinkElement = document.querySelector('#submitLink')
+
+const questionErrorMessage = document.querySelector('#question-error')
+const linkErrorMessage = document.querySelector('#link-error')
 
 const headers = new Headers()
 headers.set("content-type", "application/json")
@@ -25,12 +29,27 @@ const renderQuestions = (data) =>
 const getAllQuestions = () =>
     fetch('/questions')
         .then(response => response.ok ? response.json() : Promise.reject())
-        .then(data => renderQuestions(data))
+        .then(data => {
+            questionErrorMessage.style.visibility = "hidden"
+            renderQuestions(data)
+        })
 
 const getAllLinks = () =>
     fetch('/links')
         .then(response => response.ok ? response.json() : Promise.reject())
         .then(data => data.forEach(d => createLinkElement(d)))
+
+const deleteQuestion = (id) => {
+    fetch(`/questions/delete/${id}`, {
+        headers,
+        method: 'DELETE'
+    })
+        .then(response => response.ok ? response.json : Promise.reject())
+        .then(data => {
+            questionParent.innerHTML = ""
+            renderQuestions(data)
+        })
+}
 
 const createQuestionElement = (d) => {
     const text = d.question
@@ -67,6 +86,8 @@ const createQuestionElement = (d) => {
     `
 
     el.style.backgroundColor = (highlighted) ? '#ffff00' : '#ffffff'
+    if(highlighted)
+        el.querySelector('.clear-question').toggleAttribute('disabled')
 
     el.querySelector('#up-arrow-button').addEventListener('click', handleUpvote)
     el.querySelector('.clear-question').addEventListener('click', () => highlightQuestion(el))
@@ -100,6 +121,7 @@ const addQuestionToServer = (name, lab) => {
     })
         .then(response => response.ok ? response.json : Promise.reject())
         .then(data => {
+            questionErrorMessage.style.visibility = "hidden"
             questionParent.appendChild(createQuestionElement(data))
 
             questionInputElement.removeAttribute('disabled')
@@ -108,7 +130,10 @@ const addQuestionToServer = (name, lab) => {
             spanElement.textContent = '0'
             spanElement.dataset.value = '0'
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            console.log(err)
+            questionErrorMessage.style.visibility = "visible"
+        })
 
 }
 
@@ -152,7 +177,6 @@ const handleUpvote = (event) => {
 }
 
 const addLinkToServer = () => {
-    const linkInput = document.querySelector('#linkInput input:first-child')
     const _link = linkInput.value
     fetch(`/links`, {
         headers,
@@ -163,15 +187,19 @@ const addLinkToServer = () => {
     })
         .then(response => response.ok ? response.json() : Promise.reject()) //TODO — unexpected token L in position 0
         .then(data => {
+            linkErrorMessage.style.visiblity = "hidden"
             createLinkElement(data)
             linkInput.value = ""
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            console.log(err)
+            linkErrorMessage.style.visibility = "visible"
+        })
 }
 
 /* EVENT LISTENERS AND ASSOCIATED HELPER FUNCTIONS */
 
-const processUserInput = (event) => {
+const processUserQuestion = (event) => {
     if (event.key === 'Enter') {
         if (questionInputElement.value !== "" &&
             nameInputElement.value !== "" &&
@@ -241,7 +269,7 @@ const main = () => {
 
         nameInputElement.addEventListener('keydown', associateNameWithQuestion)
 
-        questionInputElement.addEventListener('keydown', processUserInput)
+        questionInputElement.addEventListener('keydown', processUserQuestion)
 
         labsFilter.addEventListener('click', filterLabs)
 
@@ -249,12 +277,16 @@ const main = () => {
 
         submitLinkElement.addEventListener('click', addLinkToServer)
 
-        /*
+        linkInput.addEventListener('keydown', (event) => {
+            if(event.key === "Enter")
+                addLinkToServer()
+        })
+
         setInterval(() => {
             questionParent.innerHTML = "";
             (currentLab === "Choose") ? getAllQuestions() : filterLabs()
         }, 5000)
-        */
+
     }
 
 }

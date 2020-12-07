@@ -25,6 +25,13 @@ const { postFile } = require('./routes/fileUploadsPage/postFile')
 const { downloadFile } = require('./routes/fileUploadsPage/downloadFile')
 const { getFileUploadStats } = require('./routes/fileUploadsPage/getFileUploadStats')
 
+const { getDemoQ } = require('./routes/queuePage/getDemoQ')
+const { getQuestionQ } = require('./routes/queuePage/getQuestionQ')
+const { addToDemoQ } = require('./routes/queuePage/addToDemoQ')
+const { addToQuestionQ } = require('./routes/queuePage/addToQuestionQ')
+const { deleteDemo } = require('./routes/queuePage/deleteDemo')
+const { deleteQuestion } = require('./routes/queuePage/deleteQuestion')
+
 //
 //  Do "npm install multer" in terminal to install multer
 //
@@ -49,6 +56,9 @@ const main = () => {
     app.locals.questions = []
     app.locals.links = []
     app.locals.questionsPageStats = {}
+
+    app.locals.demoQ = []
+    app.locals.questionQ = []
 
     app.use(express.json())
     app.use(express.static("src"))
@@ -88,6 +98,22 @@ const main = () => {
     fs.readFile("./questionsPageStats.json", "utf-8")
         .then((data) =>
             app.locals.questionsPageStats = JSON.parse(data))
+
+    fs.readFile("./demoQ.json", "utf-8")
+      .then((data) =>
+        app.locals.demoQ = JSON.parse(data))
+
+    fs.readFile("./questionQ.json", "utf-8")
+      .then((data) =>
+        app.locals.questionQ = JSON.parse(data))
+
+    app.get('/demoQ', getDemoQ)
+    app.get('/questionQ', getQuestionQ)
+    app.post('/demoQ', addToDemoQ)
+    app.post('/questionQ', addToQuestionQ)
+    app.post('/demoQD', deleteDemo)
+    app.post('/questionQD', deleteQuestion)
+
 
     app.listen(PORT, (err) => {
         if (err) {

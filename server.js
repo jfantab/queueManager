@@ -10,7 +10,7 @@ const {getQuestionByLab} = require('./routes/questionsPage/questions/getQuestion
 const {addQuestion} = require('./routes/questionsPage/questions/addQuestion')
 const {voteQuestion} = require('./routes/questionsPage/questions/voteQuestion')
 const {highlightQuestion} = require('./routes/questionsPage/questions/higlightQuestion')
-const {deleteQuestion} = require('./routes/questionsPage/questions/deleteQuestion')
+const {removeQuestion} = require('./routes/questionsPage/questions/removeQuestion')
 
 const {addToQuestionsPageStats} = require('./routes/questionsPage/addToQuestionsPageStats')
 const {getQuestionsPageStats} = require('./routes/questionsPage/getQuestionsPageStats')
@@ -77,7 +77,7 @@ const main = () => {
     app.post('/questions/vote/:id', addToQuestionsPageStats, writeToFileMiddleware,  voteQuestion)
     app.post('/questions/highlight/:id', addToQuestionsPageStats, writeToFileMiddleware, highlightQuestion)
 
-    app.delete('/questions/delete/:id', writeToFileMiddleware, deleteQuestion)
+    app.delete('/questions/remove/:id', writeToFileMiddleware, removeQuestion)
 
     app.get('/links', getAllLinks)
 

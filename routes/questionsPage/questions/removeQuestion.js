@@ -1,4 +1,4 @@
-const deleteQuestion = (req, res) => {
+const removeQuestion = (req, res) => {
     res.app.locals.questions =
             res.app.locals.questions.filter(q => q.id !== req.params.id)
     console.log(res.app.locals.questions)
@@ -6,5 +6,5 @@ const deleteQuestion = (req, res) => {
 }
 
 module.exports = {
-    deleteQuestion
+    removeQuestion
 }

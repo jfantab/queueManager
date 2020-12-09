@@ -10,6 +10,7 @@ const {getQuestionByLab} = require('./routes/questionsPage/questions/getQuestion
 const {addQuestion} = require('./routes/questionsPage/questions/addQuestion')
 const {voteQuestion} = require('./routes/questionsPage/questions/voteQuestion')
 const {highlightQuestion} = require('./routes/questionsPage/questions/higlightQuestion')
+const {removeQuestion} = require('./routes/questionsPage/questions/removeQuestion')
 
 const {addToQuestionsPageStats} = require('./routes/questionsPage/addToQuestionsPageStats')
 const {getQuestionsPageStats} = require('./routes/questionsPage/getQuestionsPageStats')
@@ -22,6 +23,14 @@ const {writeToFileMiddleware} = require('./routes/writeToFileMiddleware')
 const { getAllFiles } = require('./routes/fileUploadsPage/getAllFiles')
 const { postFile } = require('./routes/fileUploadsPage/postFile')
 const { downloadFile } = require('./routes/fileUploadsPage/downloadFile')
+const { getFileUploadStats } = require('./routes/fileUploadsPage/getFileUploadStats')
+
+const { getDemoQ } = require('./routes/queuePage/getDemoQ')
+const { getQuestionQ } = require('./routes/queuePage/getQuestionQ')
+const { addToDemoQ } = require('./routes/queuePage/addToDemoQ')
+const { addToQuestionQ } = require('./routes/queuePage/addToQuestionQ')
+const { deleteDemo } = require('./routes/queuePage/deleteDemo')
+const { deleteQuestion } = require('./routes/queuePage/deleteQuestion')
 
 //
 //  Do "npm install multer" in terminal to install multer
@@ -46,13 +55,10 @@ const main = () => {
 
     app.locals.questions = []
     app.locals.links = []
+    app.locals.questionsPageStats = {}
 
-    app.locals.questionsPageStats = {
-        totalQuestions: 4,
-        totalLinks: 3,
-        totalUpvotes: 6,
-        totalHighlights: 1
-    }
+    app.locals.demoQ = []
+    app.locals.questionQ = []
 
     app.use(express.json())
     app.use(express.static("src"))
@@ -60,6 +66,7 @@ const main = () => {
     app.get("/getAllFiles", getAllFiles)
     app.post("/html/fileUploads.html", upload.single('upload'), postFile)
     app.get("/downloadFile/:filename", downloadFile)
+    app.get("/fileUploadStats", getFileUploadStats)
 
     app.get('/questions', getAllQuestions)
     app.get('/questions/:lab', getQuestionByLab)
@@ -69,6 +76,8 @@ const main = () => {
     app.post('/questions/:id', addToQuestionsPageStats, writeToFileMiddleware, addQuestion)
     app.post('/questions/vote/:id', addToQuestionsPageStats, writeToFileMiddleware,  voteQuestion)
     app.post('/questions/highlight/:id', addToQuestionsPageStats, writeToFileMiddleware, highlightQuestion)
+
+    app.delete('/questions/remove/:id', writeToFileMiddleware, removeQuestion)
 
     app.get('/links', getAllLinks)
 
@@ -80,9 +89,31 @@ const main = () => {
             app.locals.metadata = data
         })
 
+    fs.readFile("./uploadsMetadata/fileUploadStats.json", "utf-8")
+        .then((fileContents) => JSON.parse(fileContents))
+        .then((data) => {
+            app.locals.fileUploadStats = data
+        })
+
     fs.readFile("./questionsPageStats.json", "utf-8")
         .then((data) =>
             app.locals.questionsPageStats = JSON.parse(data))
+
+    fs.readFile("./demoQ.json", "utf-8")
+      .then((data) =>
+        app.locals.demoQ = JSON.parse(data))
+
+    fs.readFile("./questionQ.json", "utf-8")
+      .then((data) =>
+        app.locals.questionQ = JSON.parse(data))
+
+    app.get('/demoQ', getDemoQ)
+    app.get('/questionQ', getQuestionQ)
+    app.post('/demoQ', addToDemoQ)
+    app.post('/questionQ', addToQuestionQ)
+    app.post('/demoQD', deleteDemo)
+    app.post('/questionQD', deleteQuestion)
+
 
     app.listen(PORT, (err) => {
         if (err) {

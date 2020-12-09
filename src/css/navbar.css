@@ -20,14 +20,13 @@ ul {
     align-items: center;
 }
 
-a {
+.navbar a {
     text-decoration: none;
     color: white;
 }
 
 a:hover {
     text-decoration: none;
-    color: #b84517;
 }
 
 li a {
@@ -45,4 +44,8 @@ li a:last-child {
 
 #nav-header {
     width: 30vw;
+}
+
+#nav-header a:hover {
+    color: #b84517;
 }

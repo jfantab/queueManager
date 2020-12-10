@@ -44,7 +44,7 @@ const deleteQuestion = (id) => {
         headers,
         method: 'DELETE'
     })
-        .then(response => response.ok ? response.json : Promise.reject())
+        .then(response => response.ok ? response.json() : Promise.reject())
         .then(data => {
             questionParent.innerHTML = ""
             renderQuestions(data)

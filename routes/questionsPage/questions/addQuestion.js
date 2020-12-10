@@ -9,7 +9,7 @@ const addQuestion = (req, res) => {
         votes: 0
     }
     writeQuestion(newQuestion)
-    res.status(200).send("New question added")
+        .then(() => res.status(200).send(newQuestion))
 }
 
 module.exports = {

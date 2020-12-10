@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="css/navbar.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+
+</head>
+<body>
+    <div id="app">
+        <nav-bar></nav-bar>
+        <div class="flex-column" style="margin-top:3%">
+            <h1>We Hope You Enjoy Our Statistics!</h1>
+            <div class="container">
+              <h3>Questions Page:</h3>
+
+              <h3>File Upload Page:</h3>
+
+              <h3>Queue Page:</h3>
+              <ul style="list-style-type:none">
+                <li>Average questions queue wait time: <span id="questionWait"></span> minutes</li>
+                <li>Average demo queue wait time: <span id="demoWait"></span> minutes</li>
+                <li>Average demo time (time to move up one spot in the demo queue): <span id="demoTime"></span> minutes</li>
+                <li>Average question time (time to move up one spot in the questions queue): <span id="questionTime"></span> minutes</li>
+                <li>How many people the questions queue has served: <span id="questionTotal"></span></li>
+                <li>How many people the demo queue has served: <span id="demoTotal"></span></li>
+              </ul>
+            </div>
+        </div>
+    </div>
+<!-- Vue.js -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mdbvue/lib/index.js"></script>
+<script src="js/navbar.js"></script>
+<script src="js/stats.js"></script>
+
+</body>
+</html>

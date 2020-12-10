@@ -31,6 +31,7 @@ const { addToDemoQ } = require('./routes/queuePage/addToDemoQ')
 const { addToQuestionQ } = require('./routes/queuePage/addToQuestionQ')
 const { deleteDemo } = require('./routes/queuePage/deleteDemo')
 const { deleteQuestion } = require('./routes/queuePage/deleteQuestion')
+const { getQueueStats } = require('./routes/queuePage/getQueueStats')
 
 //
 //  Do "npm install multer" in terminal to install multer
@@ -59,6 +60,7 @@ const main = () => {
 
     app.locals.demoQ = []
     app.locals.questionQ = []
+    app.locals.queueStats = {}
 
     app.use(express.json())
     app.use(express.static("src"))
@@ -107,8 +109,14 @@ const main = () => {
       .then((data) =>
         app.locals.questionQ = JSON.parse(data))
 
+    fs.readFile("./queueStats.json", "utf-8")
+      .then((data) =>
+        app.locals.queueStats = JSON.parse(data))
+
     app.get('/demoQ', getDemoQ)
     app.get('/questionQ', getQuestionQ)
+    app.get('/queueStats', getQueueStats)
+
     app.post('/demoQ', addToDemoQ)
     app.post('/questionQ', addToQuestionQ)
     app.post('/demoQD', deleteDemo)

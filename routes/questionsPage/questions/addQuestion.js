@@ -1,17 +1,18 @@
+const { writeQuestion } = require('../../.././databases/firebase')
+
 const addQuestion = (req, res) => {
     const newQuestion = {
         name: req.body["name"],
         lab: req.body["lab"],
         id: req.params.id,
         question: req.body["questions"],
-        votes: 0,
-        highlighted: false
+        votes: 0
     }
-    res.app.locals.questions.push(newQuestion)
-    console.log(res.app.locals.questions)
-    res.status(200).send(newQuestion)
+    writeQuestion(newQuestion)
+    res.status(200).send("New question added")
 }
 
 module.exports = {
     addQuestion
 }
+

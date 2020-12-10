@@ -119,7 +119,7 @@ const addQuestionToServer = (name, lab) => {
             questions: text
         })
     })
-        .then(response => response.ok ? response.json : Promise.reject())
+        .then(response => response.ok ? response.json() : Promise.reject())
         .then(data => {
             questionErrorMessage.style.visibility = "hidden"
             questionParent.appendChild(createQuestionElement(data))

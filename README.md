@@ -2,6 +2,8 @@
 
 Welcome to our Queue Manager!
 
+The questions page allows students to submit questions ranked by highlighted as lowest and then descending by upvotes. Questions can also be filtered by labs. Links can also be submitted in a box below the questions box.
+
 EXAMPLES OF API CALLS:
 
 Main page:

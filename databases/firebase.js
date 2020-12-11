@@ -22,6 +22,7 @@ const database = firebase.database();
 // write a question to the database using the set method
 // https://firebase.google.com/docs/database/web/read-and-write#basic_write
 const writeQuestion = (question) => {
+  console.log("IN DB: ", question)
   return database.ref(`questions/${question.id}`).set(question);
 };
 
@@ -65,6 +66,7 @@ const listQuestions = (startAt) => {
       snapshot.forEach((child) => {
         data.push(child.val());
       });
+      console.log(data)
       resolve(data);
     });
   });

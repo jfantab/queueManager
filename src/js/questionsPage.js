@@ -108,7 +108,7 @@ const createLinkElement = (data) => {
 const addQuestionToServer = (name, lab) => {
     //send question to server & database
     const currentId = (questionParent.childNodes.length === undefined) ? Number(0) :
-        questionParent.childNodes.length++
+        ++questionParent.childNodes.length
     const text = questionInputElement.value
     fetch(`/questions/${currentId}`, {
         headers,

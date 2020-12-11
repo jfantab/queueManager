@@ -9,8 +9,8 @@ const voteQuestion = (req, res) => {
         }
     })
     console.log(res.app.locals.questions)
-    res.status(200).send("Vote updated")
-    updateQuestion(cur.id, cur.votes)
+    res.status(200).send(cur)
+    updateQuestion(cur.id, cur)
 }
 
 module.exports = {

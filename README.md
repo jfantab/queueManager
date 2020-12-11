@@ -39,8 +39,10 @@ File uploads page:
     Upload a file to the server: curl -F 'data=@<path to local file' localhost:8080/html/fileUploads.html
     
     ダウンロード　ファイル: curl localhost:8080/downloadFile/:filename --output filename
+    (Download File)
     
-    ウエブサイト　の　統計: curl localhost:8080/fileUploadStats
+    ウエブページ　の　統計: curl localhost:8080/fileUploadStats
+    (Page Statistics)
 
 Queue page: 
 

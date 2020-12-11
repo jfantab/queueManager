@@ -12,6 +12,7 @@ const addQuestion = (req, res) => {
     console.log(newQuestion)
     writeQuestion(newQuestion)
         .then(() => res.status(200).send(newQuestion))
+        .catch(() => res.sendStatus(500))
 }
 
 module.exports = {

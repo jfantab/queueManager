@@ -8,6 +8,7 @@ const getQuestionByLab = (req, res) => {
     })
     listQuestionsByLab(req.params.lab)
     res.status(200).send(cur)
+        .catch(err => console.log(err))
 }
 
 module.exports = {

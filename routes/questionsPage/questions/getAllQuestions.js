@@ -27,6 +27,7 @@ const getAllQuestions = (req, res) => {
         .then(data => res.app.locals.questions = data)
         .then(data => rankQuestions(data))
         .then(response => res.status(200).send(response))
+        .catch(() => res.sendStatus(500))
 }
 
 module.exports = {

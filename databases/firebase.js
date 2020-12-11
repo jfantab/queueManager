@@ -18,38 +18,25 @@ firebase.initializeApp(firebaseConfig);
 // get a reference to interact with database
 const database = firebase.database();
 
-
 // write a question to the database using the set method
 // https://firebase.google.com/docs/database/web/read-and-write#basic_write
 const writeQuestion = (question) => {
-  console.log("IN DB: ", question)
   return database.ref(`questions/${question.id}`).set(question);
 };
 
-// read a question with a given id from the database using the then method
-// firebase is a realtime database that notifies clients (in this case, the client
-// is actually our server) of any changes so that it can stay in sync. That's what
-// makes it a "realtime" database
-// https://firebase.google.com/docs/database/web/read-and-write#listen_for_value_events
-const readQuestion = (id) => {
-  return database
-    .ref(`questions/${id}`)
-    .once("value")
-    .then((snapshot) => {
-      return snapshot.val();
-    });
-};
+const writeLink = (id, link) => {
+  return database.ref(`links/${id}`).set(link);
+}
 
-// https://firebase.google.com/docs/database/web/lists-of-data#sort_data
-const listQuestions = (startAt) => {
+const getLinks = (startAt) => {
   let query = database
-    .ref("questions")
-    // order children by the date modified, you can change this based on some
-    // criteria (like popularity [upvotes], or creation time [created])
-    .orderByChild("dateModified")
-    // limit to only 20 entries so clients aren't waiting for the contents of
-    // the entire database.
-    .limitToLast(20);
+      .ref("links")
+      // order children by the date modified, you can change this based on some
+      // criteria (like popularity [upvotes], or creation time [created])
+      .orderByChild("dateModified")
+      // limit to only 20 entries so clients aren't waiting for the contents of
+      // the entire database.
+      .limitToLast(20);
 
   if (startAt) {
     query = query.startAt(startAt);
@@ -66,7 +53,52 @@ const listQuestions = (startAt) => {
       snapshot.forEach((child) => {
         data.push(child.val());
       });
-      console.log(data)
+      resolve(data);
+    });
+  });
+}
+
+
+// read a question with a given id from the database using the then method
+// firebase is a realtime database that notifies clients (in this case, the client
+// is actually our server) of any changes so that it can stay in sync. That's what
+// makes it a "realtime" database
+// https://firebase.google.com/docs/database/web/read-and-write#listen_for_value_events
+const readQuestion = (id) => {
+  return database
+      .ref(`questions/${id}`)
+      .once("value")
+      .then((snapshot) => {
+        return snapshot.val();
+      });
+};
+
+// https://firebase.google.com/docs/database/web/lists-of-data#sort_data
+const listQuestions = (startAt) => {
+  let query = database
+      .ref("questions")
+      // order children by the date modified, you can change this based on some
+      // criteria (like popularity [upvotes], or creation time [created])
+      .orderByChild("dateModified")
+      // limit to only 20 entries so clients aren't waiting for the contents of
+      // the entire database.
+      .limitToLast(20);
+
+  if (startAt) {
+    query = query.startAt(startAt);
+  }
+
+  // not every function returns a Promise, so here's one way to keep our API
+  // promise based. We have the callback return or resolve a promise
+  return new Promise((resolve) => {
+    query.on("value", (snapshot) => {
+      const data = [];
+      // this isn't an array forEach, it's from the firebase documentation.
+      // a snapshot has a forEach method
+      // https://firebase.google.com/docs/database/web/lists-of-data#listen_for_value_events
+      snapshot.forEach((child) => {
+        data.push(child.val());
+      });
       resolve(data);
     });
   });
@@ -74,9 +106,9 @@ const listQuestions = (startAt) => {
 
 const listQuestionsByLab = (labNumber) => {
   const query = database
-  .ref("questions")
-  .orderByChild("dateModified")
-  .equalTo({lab :labNumber})
+      .ref("questions")
+      .orderByChild("dateModified")
+      .equalTo({lab :labNumber})
   return new Promise((resolve) => {
     query.on("value", (snapshot) => {
       const data = [];
@@ -101,9 +133,10 @@ const updateQuestion = (id, newValue) => {
   return database.ref(`questions/${id}`).update(newValue);
 };
 
-
 module.exports = {
   writeQuestion,
+  writeLink,
+  getLinks,
   readQuestion,
   listQuestions,
   listQuestionsByLab,

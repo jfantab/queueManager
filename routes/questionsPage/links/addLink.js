@@ -1,3 +1,5 @@
+const { writeLink } = require('../../.././databases/firebase')
+
 const addLink = (req, res) => {
     const newLink = {
         link: req.body.link
@@ -5,6 +7,7 @@ const addLink = (req, res) => {
     res.app.locals.links.push(newLink)
     console.log(res.app.locals.links)
     res.status(200).send(newLink)
+    writeLink(res.app.locals.links.length, newLink)
 }
 
 module.exports = {

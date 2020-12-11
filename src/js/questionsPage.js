@@ -185,7 +185,7 @@ const addLinkToServer = () => {
             link: _link
         })
     })
-        .then(response => response.ok ? response.json() : Promise.reject()) //TODO — unexpected token L in position 0
+        .then(response => response.ok ? response.json() : Promise.reject())
         .then(data => {
             linkErrorMessage.style.visiblity = "hidden"
             createLinkElement(data)

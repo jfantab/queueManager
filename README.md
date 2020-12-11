@@ -1,10 +1,12 @@
 # queueManager
 
-Welcome to our Queue Manager!
+Welcome to our Queue Manager! /index.html is the path to our landing page, from where you can navigate to our other pages using the navigation bar or the stats page.
 
-The questions page allows students to submit questions ranked by highlighted as lowest and then descending by upvotes. Questions can also be filtered by labs. Links can also be submitted in a box below the questions box.
+We used Firebase for the questions page; everything else (other pages and stats) has data stored in files.
 
-The file upload page allows a user to select a file to upload to the site. The information displayed includes the file name, file type, file size, and link to download.
+The questions page allows students to submit questions ranked by highlighted as lowest and then descending by upvotes. Highlights for questions stay persistent even after refreshing or closing the browser. Questions can also be filtered by labs. Links can also be submitted below the questions box.
+
+The file upload page allows a user to select a file to upload to the site as well as download files. The information displayed includes the file name, file type, file size, and the link to download. This is our extra credit feature in this project! 
 
 The queue page allows students to add themselves to a queue for demoing or to ask questions. To add a name to either queue, the user must first input one of the approved student PINs or TA PINs. Student access only allows for a user to add names to the queue. TA access allows for the addition and removal of users from the queues. To keep track of which access is activated, the PIN input box will read either "Enter PIN" (no access; white background), "TA Access" (green background), or "Student Access" (blue background).
 

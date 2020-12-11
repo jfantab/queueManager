@@ -4,6 +4,10 @@ Welcome to our Queue Manager!
 
 The questions page allows students to submit questions ranked by highlighted as lowest and then descending by upvotes. Questions can also be filtered by labs. Links can also be submitted in a box below the questions box.
 
+The file upload page allows a user to select a file to upload to the site. The information displayed includes the file name, file type, file size, and link to download.
+
+The queue page allows students to add themselves to a queue for demoing or to ask questions. To add a name to either queue, the user must first input one of the approved student PINs or TA PINs. Student access only allows for a user to add names to the queue. TA access allows for the addition and removal of users from the queues. To keep track of which access is activated, the PIN input box will read either "Enter PIN" (no access; white background), "TA Access" (green background), or "Student Access" (blue background).
+
 EXAMPLES OF API CALLS:
 
 Main page:

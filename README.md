@@ -9,7 +9,11 @@ Main page:
     curl localhost:8080
     curl localhost:8080/
     curl localhost:8080/index.html
+    
+Stats page:
 
+    curl localhost:8080/stats.html
+    
 Questions page:
     
     Getting all questions: curl localhost:8080/questions 
@@ -30,4 +34,18 @@ Questions page:
 
 File uploads page:
 
-Demo page: 
+Queue page: 
+
+    Get all members of Demo Queue: curl localhost:8080/demoQ
+    
+    Post a member to the Demo Queue: curl -H "Content-Type: application/json" -d '{"name": "John Smith"}' localhost:8080/demoQ
+    
+    Delete a member of the Demo Queue: curl -H "Content-Type: application/json" -d '{"name": "John Smith"}' localhost:8080/demoQD
+    
+    Get all members of Questions Queue: curl localhost:8080/questionQ
+    
+    Post a member to the Questions Queue: curl -H "Content-Type: application/json" -d '{"name": "John Smith"}' localhost:8080/questionQ
+    
+    Delete a member of the Demo Queue: curl -H "Content-Type: application/json" -d '{"name": "John Smith"}' localhost:8080/questionQD
+    
+    Get all stats for both queues: curl localhost:8080/queueStats

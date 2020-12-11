@@ -46,6 +46,6 @@ Queue page:
     
     Post a member to the Questions Queue: curl -H "Content-Type: application/json" -d '{"name": "John Smith"}' localhost:8080/questionQ
     
-    Delete a member of the Demo Queue: curl -H "Content-Type: application/json" -d '{"name": "John Smith"}' localhost:8080/questionQD
+    Delete a member of the Questions Queue: curl -H "Content-Type: application/json" -d '{"name": "John Smith"}' localhost:8080/questionQD
     
     Get all stats for both queues: curl localhost:8080/queueStats

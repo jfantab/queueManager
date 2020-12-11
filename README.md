@@ -42,7 +42,7 @@ File uploads page:
     (Download File)
     
     ウエブページ　の　統計: curl localhost:8080/fileUploadStats
-    (Page Statistics)
+    (Page Statistics) (＾ω＾)
 
 Queue page: 
 

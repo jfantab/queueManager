@@ -22,6 +22,8 @@ Questions page:
     
     Highlighting the second question on the list: curl -H "Content-Type: application/json" -d '{"highlighted": true}' localhost:8080/questions/highlight/2
     
+    Deleting a question with id 2: curl -X DELETE localhost:8080/questions/delete/2 
+    
     Getting all links: curl localhost:8080/links
     
     Adding a link: curl -H "Content-Type: application/json" -d '{"link": "https://camino.instructure.com"}' localhost:8080/links

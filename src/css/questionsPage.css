@@ -75,6 +75,11 @@ button a, button a:hover {
     background: #eee;
 }
 
+.clear-question:hover:disabled {
+    background: none;
+    cursor: default;
+}
+
 .arrow-container svg {
     height: 18px;
     width: 18px;
@@ -93,6 +98,14 @@ input[value="Submit"] {
     margin-top: 1vh;
     height: 2rem;
     width: 4.5rem;
+}
+
+#question-error {
+    visibility: hidden;
+}
+
+#link-error {
+    visibility: hidden;
 }
 
 .labId {

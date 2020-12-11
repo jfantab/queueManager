@@ -63,7 +63,7 @@ const main = () => {
     app.locals.queueStats = {}
 
     app.use(express.json())
-    app.use(express.static("src"))
+    app.use(express.static("static"))
 
     app.get("/getAllFiles", getAllFiles)
     app.post("/html/fileUploads.html", upload.single('upload'), postFile)

@@ -13,8 +13,24 @@ button a, button a:hover {
     color: black;
 }
 
-#app {
-    height: 100vh;
+div > input:first-child {
+    height: 10vh;
+    width: 65vw;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 1vw;
+}
+
+input[value="Submit"] {
+    margin-top: 1vh;
+    height: 2rem;
+    width: 4.5rem;
+}
+
+header {
+    margin-top: 10vh;
+    margin-left: 16vw;
+    margin-bottom: -5vh;
 }
 
 .container {
@@ -86,28 +102,6 @@ button a, button a:hover {
     margin: 1px;
 }
 
-div > input:first-child {
-    height: 10vh;
-    width: 65vw;
-    margin-right: auto;
-    margin-left: auto;
-    padding-left: 1vw;
-}
-
-input[value="Submit"] {
-    margin-top: 1vh;
-    height: 2rem;
-    width: 4.5rem;
-}
-
-#question-error {
-    visibility: hidden;
-}
-
-#link-error {
-    visibility: hidden;
-}
-
 .labId {
     justify-content: flex-start;
     width: 3vw;
@@ -118,6 +112,15 @@ input[value="Submit"] {
     border-bottom: 1px solid gray;
     width: 100%;
     height: 5vh;
+}
+
+
+#app {
+    height: 100vh;
+}
+
+#link-error {
+    visibility: hidden;
 }
 
 #links {
@@ -139,4 +142,8 @@ input[value="Submit"] {
     right: 0;
     height: 3vw;
     width: 5vw;
+}
+
+#question-error {
+    visibility: hidden;
 }

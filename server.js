@@ -75,6 +75,8 @@ const main = () => {
 
     app.get('/questionsPageStats', getQuestionsPageStats)
 
+    app.get('/html', emitError)
+
     app.post('/questions/:id', addToQuestionsPageStats, writeToFileMiddleware, addQuestion)
     app.post('/questions/vote/:id', addToQuestionsPageStats, writeToFileMiddleware,  voteQuestion)
     app.post('/questions/highlight/:id', addToQuestionsPageStats, writeToFileMiddleware, highlightQuestion)
@@ -84,6 +86,8 @@ const main = () => {
     app.get('/links', getAllLinks)
 
     app.post('/links', writeToFileMiddleware, addToQuestionsPageStats, addLink)
+
+    app.use(handleError)
 
     fs.readFile("./uploadsMetadata/metadata.json", "utf-8")
         .then((fileContents) => JSON.parse(fileContents))

@@ -33,6 +33,14 @@ Questions page:
     Adding a link: curl -H "Content-Type: application/json" -d '{"link": "https://camino.instructure.com"}' localhost:8080/links
 
 File uploads page:
+    
+    Getting all files already on the server: curl localhost:8080/getAllFiles
+    
+    Upload a file to the server: curl -F 'data=@<path to local file' localhost:8080/html/fileUploads.html
+    
+    ダウンロード　ファイル: curl localhost:8080/downloadFile/:filename --output filename
+    
+    ウエブサイト　の　統計: curl localhost:8080/fileUploadStats
 
 Queue page: 
 

@@ -23,11 +23,10 @@ const rankQuestions = (data) => {
 }
 
 const getAllQuestions = (req, res) => {
-    fs.readFile('./questions.json', { encoding: 'utf-8' })
-        .then(data => res.app.locals.questions = JSON.parse(data))
+    listQuestions(0)
+        .then(data => res.app.locals.questions = data)
         .then(data => rankQuestions(data))
         .then(response => res.status(200).send(response))
-    listQuestions(0)
 }
 
 module.exports = {

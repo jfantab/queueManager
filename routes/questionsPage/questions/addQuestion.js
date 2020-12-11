@@ -6,8 +6,10 @@ const addQuestion = (req, res) => {
         lab: req.body["lab"],
         id: req.params.id,
         question: req.body["questions"],
+        highlighted: false,
         votes: 0
     }
+    console.log(newQuestion)
     writeQuestion(newQuestion)
         .then(() => res.status(200).send(newQuestion))
 }

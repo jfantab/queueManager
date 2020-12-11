@@ -1,3 +1,5 @@
+const { updateQuestion } = require('../../.././databases/firebase')
+
 const highlightQuestion = (req, res) => {
     let cur = {}
     res.app.locals.questions.forEach(q => {
@@ -8,6 +10,7 @@ const highlightQuestion = (req, res) => {
     })
     console.log(cur)
     res.status(200).send(cur)
+    updateQuestion(cur.id, cur)
 }
 
 module.exports = {
